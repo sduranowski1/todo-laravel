@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 class SendTaskDueNotifications extends Command
 {
     protected $signature = 'tasks:send-due-notifications';
-    protected $description = 'Send email notifications for tasks due tomorrow';
+    protected $description = 'Send emails notifications for tasks due tomorrow';
 
     public function __construct()
     {
@@ -24,9 +24,9 @@ class SendTaskDueNotifications extends Command
         $tasks = Task::whereDate('due_date', Carbon::tomorrow()->toDateString())->get();
 
         foreach ($tasks as $task) {
-            // Send a queued email notification for each task
-            Mail::to('sduranowski1@gmail.com') // Replace with the appropriate user's email
-            ->queue(new TaskDueNotification($task)); // Queue the email to be sent
+            // Send a queued emails notification for each task
+            Mail::to('sduranowski1@gmail.com') // Replace with the appropriate user's emails
+            ->queue(new TaskDueNotification($task)); // Queue the emails to be sent
         }
 
         $this->info('Task due notifications have been sent for tomorrow\'s tasks.');

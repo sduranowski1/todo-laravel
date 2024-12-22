@@ -1,7 +1,9 @@
 <?php
 
+use App\Mail\TaskDueNotification;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +17,10 @@ Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show')
 Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+Route::get('/send-test-emails', function () {
+    Mail::to('sduranowski1@gmail.com')->send(new TaskDueNotification());
+    return 'Test emails sent!';
+});
 
 
 Route::get('/dashboard', function () {
